@@ -9,4 +9,7 @@ const (
 
 	// Main network node address
 	NetworkNode = "3AVTze8bR1SqqMKv3uLedrnqCuWpdU7GZwX"
+
+	// AintFee is Aint regular fee amount
+	AintFee = 100000
 )
