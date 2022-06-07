@@ -11,10 +11,10 @@ func sendAINT(recipient string, amount int) {
 		Recipient: recipient,
 		Amount:    amount,
 		Fee:       AintFee,
+		Sender:    NodeAddress,
 	}
-	atres, err := gowaves.WNC.AssetsTransfer(atr)
+	_, err := gowaves.WNC.AssetsTransfer(atr)
 	if err != nil {
 		log.Println(err.Error())
 	}
-	log.Println(atres)
 }
