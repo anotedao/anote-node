@@ -2,6 +2,7 @@ package main
 
 import (
 	"log"
+	"time"
 
 	"github.com/anonutopia/gowaves"
 )
@@ -28,7 +29,13 @@ func initWaves() {
 	a, err := gowaves.WNC.Addresses()
 	if err != nil {
 		log.Println(err.Error())
+		for err != nil {
+			time.Sleep(time.Second * 10)
+			a, err = gowaves.WNC.Addresses()
+			log.Println(err.Error())
+		}
 	}
+
 	ar := *a
 	NodeAddress = ar[0]
 	log.Println(NodeAddress)
