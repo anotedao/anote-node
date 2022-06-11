@@ -1,2 +1,2 @@
-# aint-node
-AINT Node
+# anote-node
+Anote Node

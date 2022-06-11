@@ -8,7 +8,8 @@ import (
 
 // Config struct holds all our configuration
 type Config struct {
-	ApiKey string `json:"api_key"`
+	ApiKey       string `json:"api_key"`
+	OwnerAddress string `json:"owner_address"`
 }
 
 // Load method loads configuration file to Config struct

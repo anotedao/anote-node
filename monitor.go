@@ -22,7 +22,7 @@ func (m *Monitor) getHeight() int {
 func (m *Monitor) payToNetwork() {
 	amount := SatInBTC
 	amount = amount - (amount / 500)
-	sendAINT(NetworkNode, int(amount))
+	sendAnote(NetworkNode, int(amount))
 }
 
 func (m *Monitor) isGeneratingNode() bool {

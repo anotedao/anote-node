@@ -18,7 +18,9 @@ func initWaves() {
 		for err != nil {
 			time.Sleep(time.Second * 10)
 			a, err = gowaves.WNC.Addresses()
-			log.Println(err.Error())
+			if err != nil {
+				log.Println(err.Error())
+			}
 		}
 	}
 

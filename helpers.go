@@ -6,11 +6,11 @@ import (
 	"github.com/anonutopia/gowaves"
 )
 
-func sendAINT(recipient string, amount int) {
+func sendAnote(recipient string, amount int) {
 	atr := &gowaves.AssetsTransferRequest{
 		Recipient: recipient,
 		Amount:    amount,
-		Fee:       AintFee,
+		Fee:       AnoteFee,
 		Sender:    NodeAddress,
 	}
 	_, err := gowaves.WNC.AssetsTransfer(atr)
