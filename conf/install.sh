@@ -6,8 +6,10 @@ echo "Waiting for other apt-get instances to exit"
 sleep 10
 done
 
+export DEBIAN_FRONTEND=noninteractive
+
 apt update
-apt upgrade -y
+apt upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" --force-yes
 
 apt install -y supervisor ca-certificates-java fontconfig-config fonts-dejavu-core java-common libavahi-client3 libavahi-common-data libavahi-common3 libcups2 libfontconfig1 libgraphite2-3 libharfbuzz0b libjpeg-turbo8 libjpeg8 liblcms2-2 libpcsclite1
   openjdk-17-jre-headless
@@ -20,8 +22,9 @@ chown -R waves:waves /var/lib/anote/
 
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.conf
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
-
+wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
 wget https://github.com/anonutopia/anote-node/releases/download/v1.0.2/anote-node
+service waves restart
 chmod +x anote-node
 ./anote-node -init
 source ./seed
@@ -34,7 +37,6 @@ mv application.ini /etc/waves/application.ini
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.conf
 mv anote.conf /etc/supervisor/conf.d/
 
-wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
 sed -i "s/ADDRESS/$ADDRESS/g" config.json
 sed -i "s/KEY/$KEY/g" config.json
 
