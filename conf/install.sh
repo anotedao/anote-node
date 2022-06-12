@@ -19,6 +19,7 @@ chmod +x anote-node
 ./anote-node -init
 source ./seed
 sed -i "s/ENCODED/$ENCODED/g" waves.conf
+sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KENCODED/g" waves.conf
 mv waves.conf /etc/waves/waves.conf
 
 mv application.ini /etc/waves/application.ini
@@ -28,6 +29,7 @@ mv anote.conf /etc/supervisor/conf.d/
 
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
 sed -i "s/ADDRESS/$ADDRESS/g" waves.conf
+sed -i "s/KEY/$KEY/g" waves.conf
 
 service supervisor restart
 service waves restart
