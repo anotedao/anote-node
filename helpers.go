@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"log"
 	"math/rand"
 	"net/http"
@@ -45,12 +46,13 @@ func checkFlags() bool {
 		seedStr := ""
 		seed, encoded := generateSeed()
 		key, encKey := generateApiKey()
+		ip := getIP()
 
 		seedStr += fmt.Sprintf("export SEED='%s'\n", seed)
 		seedStr += fmt.Sprintf("export ENCODED='%s'\n", encoded)
 		seedStr += fmt.Sprintf("export KEY='%s'\n", key)
 		seedStr += fmt.Sprintf("export KENCODED='%s'\n", encKey)
-		seedStr += fmt.Sprintf("export NODEADDRESS='%s'", NodeAddress)
+		seedStr += fmt.Sprintf("export PUBLICIP='%s'", ip)
 
 		f, _ := os.Create("seed")
 		defer f.Close()
@@ -162,4 +164,21 @@ func generatePassword(passwordLength, minSpecialChar, minNum, minUpperCase int) 
 		inRune[i], inRune[j] = inRune[j], inRune[i]
 	})
 	return string(inRune)
+}
+
+func getIP() string {
+	url := "https://api.ipify.org?format=text"
+
+	resp, err := http.Get(url)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	defer resp.Body.Close()
+
+	ip, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		log.Println(err.Error())
+	}
+
+	return string(ip)
 }
