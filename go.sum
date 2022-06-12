@@ -28,6 +28,14 @@ github.com/anonutopia/gowaves v1.0.19 h1:/FOBpwj2AnFuy3j5RfjkYuCZXjWBxzFe3Iu6v1r
 github.com/anonutopia/gowaves v1.0.19/go.mod h1:MPnrhYqdggodOK4qKvKEvgifSJfHYayysM34Kw6t1NI=
 github.com/anonutopia/gowaves v1.0.20 h1:iIANwCUePEB2wLHNt/J2r5Cp1O+43Pl3SU21i5xi07Y=
 github.com/anonutopia/gowaves v1.0.20/go.mod h1:MPnrhYqdggodOK4qKvKEvgifSJfHYayysM34Kw6t1NI=
+github.com/anonutopia/gowaves v1.0.21 h1:7wpIPKhHBAiP1pEzsC/2v3GamUEq3jt4n9eL/h2mFUE=
+github.com/anonutopia/gowaves v1.0.21/go.mod h1:MPnrhYqdggodOK4qKvKEvgifSJfHYayysM34Kw6t1NI=
+github.com/anonutopia/gowaves v1.0.22 h1:WDwnxwD5wDfGVussatbBMy3agBHfJI1ixJ/4Xq+6Wvk=
+github.com/anonutopia/gowaves v1.0.22/go.mod h1:MPnrhYqdggodOK4qKvKEvgifSJfHYayysM34Kw6t1NI=
+github.com/anonutopia/gowaves v1.0.23 h1:R+o9/084aWsmu2407X0m9+RL4ylLUQrF8BYGYKygsQc=
+github.com/anonutopia/gowaves v1.0.23/go.mod h1:MPnrhYqdggodOK4qKvKEvgifSJfHYayysM34Kw6t1NI=
+github.com/anonutopia/gowaves v1.0.24 h1:n+CpK/tRpZ81XHuwdtAVe2jVG9A8u4+MrrdKXwvNW38=
+github.com/anonutopia/gowaves v1.0.24/go.mod h1:MPnrhYqdggodOK4qKvKEvgifSJfHYayysM34Kw6t1NI=
 github.com/apmckinlay/gsuneido v0.0.0-20190404155041-0b6cd442a18f/go.mod h1:JU2DOj5Fc6rol0yaT79Csr47QR0vONGwJtBNGRD7jmc=
 github.com/aristanetworks/goarista v0.0.0-20170210015632-ea17b1a17847/go.mod h1:D/tb0zPVXnP7fmsLZjtdUhSsumbK/ij54UXjjVgMGxQ=
 github.com/aws/aws-sdk-go v1.25.48/go.mod h1:KmX6BPdI08NWTb3/sm4ZGu5ShLoqVDhKgpiN924inxo=

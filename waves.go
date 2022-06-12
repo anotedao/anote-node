@@ -11,6 +11,7 @@ func initWaves() {
 	gowaves.WNC.Host = "http://localhost"
 	gowaves.WNC.Port = 6869
 	gowaves.WNC.ApiKey = conf.ApiKey
+	// gowaves.WNC.Debug = true
 
 	a, err := gowaves.WNC.Addresses()
 	if err != nil {

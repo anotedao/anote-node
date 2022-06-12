@@ -9,10 +9,19 @@ import (
 	"math/rand"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/anonutopia/gowaves"
 	"github.com/mr-tron/base58"
+)
+
+var (
+	lowerCharSet   = "abcdedfghijklmnopqrst"
+	upperCharSet   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	specialCharSet = "!@#$%&*"
+	numberSet      = "0123456789"
+	allCharSet     = lowerCharSet + upperCharSet + specialCharSet + numberSet
 )
 
 func sendAnote(recipient string, amount int) {
@@ -35,9 +44,13 @@ func checkFlags() bool {
 	if *init {
 		seedStr := ""
 		seed, encoded := generateSeed()
+		key, encKey := generateApiKey()
 
 		seedStr += fmt.Sprintf("export SEED='%s'\n", seed)
-		seedStr += fmt.Sprintf("export ENCODED='%s'", encoded)
+		seedStr += fmt.Sprintf("export ENCODED='%s'\n", encoded)
+		seedStr += fmt.Sprintf("export KEY='%s'\n", key)
+		seedStr += fmt.Sprintf("export KENCODED='%s'\n", encKey)
+		seedStr += fmt.Sprintf("export NODEADDRESS='%s'", NodeAddress)
 
 		f, _ := os.Create("seed")
 		defer f.Close()
@@ -98,10 +111,55 @@ func generateSeed() (seed string, encoded string) {
 	return seed, encoded
 }
 
+func generateApiKey() (key string, encodedKey string) {
+	key = generatePassword(15, 3, 2, 3)
+	uhsr, err := gowaves.WNC.UtilsHashSecure(key)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	if err != nil {
+		log.Println(err.Error())
+	}
+	return key, uhsr.Hash
+}
+
 func getRandNum() int {
 	rand.Seed(time.Now().UnixNano())
 	min := 1
 	max := 2048
 	rn := rand.Intn(max-min+1) + min
 	return rn
+}
+
+func generatePassword(passwordLength, minSpecialChar, minNum, minUpperCase int) string {
+	var password strings.Builder
+
+	// Set special character
+	for i := 0; i < minSpecialChar; i++ {
+		random := rand.Intn(len(specialCharSet))
+		password.WriteString(string(specialCharSet[random]))
+	}
+
+	//Set numeric
+	for i := 0; i < minNum; i++ {
+		random := rand.Intn(len(numberSet))
+		password.WriteString(string(numberSet[random]))
+	}
+
+	//Set uppercase
+	for i := 0; i < minUpperCase; i++ {
+		random := rand.Intn(len(upperCharSet))
+		password.WriteString(string(upperCharSet[random]))
+	}
+
+	remainingLength := passwordLength - minSpecialChar - minNum - minUpperCase
+	for i := 0; i < remainingLength; i++ {
+		random := rand.Intn(len(allCharSet))
+		password.WriteString(string(allCharSet[random]))
+	}
+	inRune := []rune(password.String())
+	rand.Shuffle(len(inRune), func(i, j int) {
+		inRune[i], inRune[j] = inRune[j], inRune[i]
+	})
+	return string(inRune)
 }

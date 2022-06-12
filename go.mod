@@ -3,7 +3,8 @@ module anote-node
 go 1.17
 
 require (
-	github.com/anonutopia/gowaves v1.0.21
+	github.com/anonutopia/gowaves v1.0.24
+	github.com/mr-tron/base58 v1.1.2
 	github.com/wavesplatform/gowaves v0.9.0
 )
 
@@ -14,7 +15,6 @@ require (
 	github.com/itchyny/base58-go v0.2.0 // indirect
 	github.com/jinzhu/copier v0.0.0-20190625015134-976e0346caa8 // indirect
 	github.com/kilic/bls12-381 v0.0.0-20200820230200-6b2c19996391 // indirect
-	github.com/mr-tron/base58 v1.1.2 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	go.uber.org/atomic v1.4.0 // indirect
