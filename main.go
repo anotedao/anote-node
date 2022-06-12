@@ -14,11 +14,13 @@ var NodeAddress string
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	conf = initConfig()
+	if checkFlags() {
+		conf = initConfig()
 
-	initWaves()
+		initWaves()
 
-	m = initMonitor()
+		m = initMonitor()
 
-	fmt.Println("Done.")
+		fmt.Println("Done.")
+	}
 }

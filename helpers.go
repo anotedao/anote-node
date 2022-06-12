@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"log"
 
 	"github.com/anonutopia/gowaves"
@@ -17,4 +18,15 @@ func sendAnote(recipient string, amount int) {
 	if err != nil {
 		log.Println(err.Error())
 	}
+}
+
+func checkFlags() bool {
+	init := flag.Bool("init", false, "Initializes your Anote Node.")
+	flag.Parse()
+
+	if *init {
+		return false
+	}
+
+	return true
 }
