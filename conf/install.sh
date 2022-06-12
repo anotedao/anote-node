@@ -7,7 +7,7 @@ sleep 10
 done
 
 apt update
-apt upgrade
+apt upgrade -y
 
 apt install -y supervisor ca-certificates-java fontconfig-config fonts-dejavu-core java-common libavahi-client3 libavahi-common-data libavahi-common3 libcups2 libfontconfig1 libgraphite2-3 libharfbuzz0b libjpeg-turbo8 libjpeg8 liblcms2-2 libpcsclite1
   openjdk-17-jre-headless
@@ -38,5 +38,4 @@ wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
 sed -i "s/ADDRESS/$ADDRESS/g" waves.conf
 sed -i "s/KEY/$KEY/g" waves.conf
 
-service supervisor restart
-service waves restart
+reboot
