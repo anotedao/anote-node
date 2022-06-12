@@ -33,7 +33,7 @@ service waves restart
 chmod +x anote-node
 ./anote-node -init
 source ./seed
-sed -i "s/ENCODED/$ENCODED/g" waves.conf
+sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KENCODED/g" waves.conf
 mv waves.conf /etc/waves/waves.conf
 mv application.ini /etc/waves/application.ini
