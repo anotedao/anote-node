@@ -1,17 +1,16 @@
 #!/bin/bash
 
 while fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do
-while fuser /var/lib/dpkg/lock-frontend >/dev/null 2>&1 ; do
 echo "Waiting for other apt-get instances to exit"
 # Sleep to avoid pegging a CPU core while polling this lock
-sleep 30
-done
+sleep 10
 done
 
 apt update
 apt upgrade
 
-apt install supervisor java8-runtime-headless
+apt install supervisor ca-certificates-java fontconfig-config fonts-dejavu-core java-common libavahi-client3 libavahi-common-data libavahi-common3 libcups2 libfontconfig1 libgraphite2-3 libharfbuzz0b libjpeg-turbo8 libjpeg8 liblcms2-2 libpcsclite1
+  openjdk-17-jre-headless
 
 wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.6/waves_1.4.6_all.deb
 dpkg -i waves_1.4.6_all.deb
