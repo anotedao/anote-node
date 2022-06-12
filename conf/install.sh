@@ -19,7 +19,7 @@ wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.6/waves_1.
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.conf
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
-wget https://github.com/anonutopia/anote-node/releases/download/v1.0.2/anote-node
+wget https://github.com/anonutopia/anote-node/releases/download/v1.0.3/anote-node
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.conf
 
 # Install Waves node
@@ -35,6 +35,7 @@ chmod +x anote-node
 source ./seed
 sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KENCODED/g" waves.conf
+sed -i "s/127.0.0.1:/$PUBLICIP/g" waves.conf
 mv waves.conf /etc/waves/waves.conf
 mv application.ini /etc/waves/application.ini
 mv anote.conf /etc/supervisor/conf.d/
