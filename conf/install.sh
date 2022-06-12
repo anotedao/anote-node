@@ -35,7 +35,7 @@ wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.con
 mv anote.conf /etc/supervisor/conf.d/
 
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
-sed -i "s/ADDRESS/$ADDRESS/g" waves.conf
-sed -i "s/KEY/$KEY/g" waves.conf
+sed -i "s/ADDRESS/$ADDRESS/g" config.json
+sed -i "s/KEY/$KEY/g" config.json
 
 reboot
