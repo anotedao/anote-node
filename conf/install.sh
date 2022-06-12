@@ -26,5 +26,8 @@ mv application.ini /etc/waves/application.ini
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.conf
 mv anote.conf /etc/supervisor/conf.d/
 
+wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
+sed -i "s/ADDRESS/$ADDRESS/g" waves.conf
+
 service supervisor restart
 service waves restart
