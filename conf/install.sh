@@ -21,7 +21,7 @@ chown -R waves:waves /var/lib/anote/
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.conf
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
 
-wget https://github.com/anonutopia/anote-node/releases/download/v1.0.1/anote-node
+wget https://github.com/anonutopia/anote-node/releases/download/v1.0.2/anote-node
 chmod +x anote-node
 ./anote-node -init
 source ./seed
