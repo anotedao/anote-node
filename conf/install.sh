@@ -15,15 +15,19 @@ apt install -y supervisor ca-certificates-java fontconfig-config fonts-dejavu-co
   openjdk-17-jre-headless
 
 wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.6/waves_1.4.6_all.deb
+wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.conf
+wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
+wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
+wget https://github.com/anonutopia/anote-node/releases/download/v1.0.2/anote-node
+wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.conf
+
 dpkg -i waves_1.4.6_all.deb
 
 mkdir /var/lib/anote
 chown -R waves:waves /var/lib/anote/
 
-wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.conf
-wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
-wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
-wget https://github.com/anonutopia/anote-node/releases/download/v1.0.2/anote-node
+cp waves.conf /etc/waves/waves.conf
+
 service waves restart
 chmod +x anote-node
 ./anote-node -init
@@ -34,7 +38,6 @@ mv waves.conf /etc/waves/waves.conf
 
 mv application.ini /etc/waves/application.ini
 
-wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.conf
 mv anote.conf /etc/supervisor/conf.d/
 
 sed -i "s/ADDRESS/$ADDRESS/g" config.json
