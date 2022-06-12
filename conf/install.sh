@@ -3,10 +3,10 @@
 apt update
 apt upgrade
 
-apt install supervisor
+apt install supervisor java8-runtime-headless
 
 wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.6/waves_1.4.6_all.deb
-apt install -f ./waves_1.4.6_all.deb
+dpkg -i waves_1.4.6_all.deb
 
 mkdir /var/lib/anote
 chown -R waves:waves /var/lib/anote/
