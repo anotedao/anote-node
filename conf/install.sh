@@ -3,7 +3,7 @@
 while fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do
 echo "Waiting for other apt-get instances to exit"
 # Sleep to avoid pegging a CPU core while polling this lock
-sleep 1
+sleep 30
 done
 
 apt update
