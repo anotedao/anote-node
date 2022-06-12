@@ -12,4 +12,7 @@ const (
 
 	// AnoteFee is Anote regular fee amount
 	AnoteFee = 100000
+
+	// SeedWordsURL contains all words for generating seed
+	SeedWordsURL = "https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt"
 )
