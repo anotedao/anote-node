@@ -43,4 +43,9 @@ mv anote.conf /etc/supervisor/conf.d/
 sed -i "s/ADDRESS/$ADDRESS/g" config.json
 sed -i "s/KEY/$KEY/g" config.json
 
+# Remove extra files and folders
+service waves stop
+rm -rf /var/lib/waves
+rm -rf /var/lib/anote/wallet
+
 reboot
