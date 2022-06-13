@@ -20,12 +20,22 @@ func (m *Monitor) getHeight() int {
 }
 
 func (m *Monitor) sendRewards() {
-	amount := SatInBTC
-	amount = amount - (amount / 10)
-	sendAnote(NetworkNode, int(amount))
+	fee, err := gowaves.WNC.AddressesDataKey(NetworkNode, "fee")
+	if err != nil {
+		log.Println(err.Error())
+	}
 
-	amount = SatInBTC - amount - (2 * AnoteFee)
-	sendAnote(conf.OwnerAddress, int(amount))
+	total := balance()
+
+	if total > 0 {
+		total -= 2 * AnoteFee
+
+		amountFee := total * int(float64(fee.Value)/float64(1000))
+		sendAnote(NetworkNode, amountFee)
+
+		amountOwner := total - amountFee
+		sendAnote(conf.OwnerAddress, amountOwner)
+	}
 }
 
 func (m *Monitor) isGeneratingNode() bool {

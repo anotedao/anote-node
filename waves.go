@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 	"time"
 
@@ -27,5 +28,5 @@ func initWaves() {
 
 	ar := *a
 	NodeAddress = ar[0]
-	log.Println(NodeAddress)
+	fmt.Printf("Node Address: %s", NodeAddress)
 }

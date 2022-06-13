@@ -3,7 +3,7 @@ module anote-node
 go 1.17
 
 require (
-	github.com/anonutopia/gowaves v1.0.24
+	github.com/anonutopia/gowaves v1.0.25
 	github.com/mr-tron/base58 v1.1.2
 	github.com/wavesplatform/gowaves v0.9.0
 )

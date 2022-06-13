@@ -182,3 +182,12 @@ func getIP() string {
 
 	return string(ip)
 }
+
+func balance() int {
+	abr, err := gowaves.WNC.AddressesBalance(NodeAddress)
+	if err != nil {
+		log.Println(err.Error())
+		return 0
+	}
+	return abr.Balance
+}
