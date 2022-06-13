@@ -5,7 +5,7 @@ const (
 	SatInBTC = uint64(100000000)
 
 	// MonitorTick interval in seconds
-	MonitorTick = 3
+	MonitorTick = 10
 
 	// Main network node address
 	NetworkNode = "3AVTze8bR1SqqMKv3uLedrnqCuWpdU7GZwX"
