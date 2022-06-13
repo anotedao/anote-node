@@ -28,5 +28,5 @@ func initWaves() {
 
 	ar := *a
 	NodeAddress = ar[0]
-	fmt.Printf("Node Address: %s", NodeAddress)
+	fmt.Printf("Node Address: %s\n", NodeAddress)
 }

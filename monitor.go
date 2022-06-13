@@ -30,7 +30,7 @@ func (m *Monitor) sendRewards() {
 	if total > 0 {
 		total -= 2 * AnoteFee
 
-		amountFee := total * int(float64(fee.Value)/float64(1000))
+		amountFee := int(float64(total) * float64(fee.Value) / float64(1000))
 		sendAnote(NetworkNode, amountFee)
 
 		amountOwner := total - amountFee
