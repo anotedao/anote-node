@@ -20,7 +20,7 @@ wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.con
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.json
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.conf
-wget https://github.com/anonutopia/anote-node/releases/download/v1.0.7/anote-node
+wget https://github.com/anonutopia/anote-node/releases/download/v1.0.8/anote-node
 
 # Install Waves node
 dpkg -i waves_1.4.6_all.deb
