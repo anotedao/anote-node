@@ -28,22 +28,16 @@ func (m *Monitor) sendRewards() {
 	total := balance()
 
 	if total > 0 {
-		total -= 2 * AnoteFee
+		total -= (2 * AnoteFee)
 
-		amountFee := int(float64(total) * float64(fee.Value) / float64(1000))
-		sendAnote(NetworkNode, amountFee)
+		amountOwner := int(float64(total) * float64(1000-fee.Value) / float64(1000))
+		log.Printf("Amount owner: %d\n", amountOwner)
+		sendAnote(NetworkNode, amountOwner)
 
-		amountOwner := total - amountFee
-		sendAnote(conf.OwnerAddress, amountOwner)
+		amountFee := total - amountOwner
+		log.Printf("Amount fee: %d\n", amountFee)
+		sendAnote(conf.OwnerAddress, amountFee)
 	}
-}
-
-func (m *Monitor) isGeneratingNode() bool {
-	bar, err := gowaves.WNC.BlocksAt(uint(m.height))
-	if err != nil {
-		log.Println(err.Error())
-	}
-	return bar.Generator == NodeAddress
 }
 
 func (m *Monitor) run() {
@@ -51,7 +45,7 @@ func (m *Monitor) run() {
 	for {
 		if m.getHeight() > m.height {
 			m.height = m.getHeight()
-			if m.isGeneratingNode() {
+			if balance() > AnoteFee {
 				m.sendRewards()
 				log.Println("Mined.")
 			}
