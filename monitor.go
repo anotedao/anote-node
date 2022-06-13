@@ -23,6 +23,9 @@ func (m *Monitor) sendRewards() {
 	amount := SatInBTC
 	amount = amount - (amount / 10)
 	sendAnote(NetworkNode, int(amount))
+
+	amount = SatInBTC - amount - (2 * AnoteFee)
+	sendAnote(conf.OwnerAddress, int(amount))
 }
 
 func (m *Monitor) isGeneratingNode() bool {
