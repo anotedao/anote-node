@@ -30,15 +30,13 @@ func (m *Monitor) sendRewards() {
 	if total >= int(SatInBTC) {
 		total -= (2 * AnoteFee)
 
-		amountOwner := int(float64(total) * float64(1000-fee.Value) / float64(1000))
-		log.Printf("Amount owner: %d\n", amountOwner)
-		if amountOwner > AnoteFee {
+		if total > 0 {
+			amountOwner := int(float64(total) * float64(1000-fee.Value) / float64(1000))
+			log.Printf("Amount owner: %d\n", amountOwner)
 			sendAnote(conf.OwnerAddress, amountOwner)
-		}
 
-		amountFee := total - amountOwner
-		log.Printf("Amount fee: %d\n", amountFee)
-		if amountFee > AnoteFee {
+			amountFee := total - amountOwner
+			log.Printf("Amount fee: %d\n", amountFee)
 			sendAnote(NetworkNode, amountFee)
 		}
 	}
