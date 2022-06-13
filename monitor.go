@@ -32,11 +32,11 @@ func (m *Monitor) sendRewards() {
 
 		amountOwner := int(float64(total) * float64(1000-fee.Value) / float64(1000))
 		log.Printf("Amount owner: %d\n", amountOwner)
-		sendAnote(NetworkNode, amountOwner)
+		sendAnote(conf.OwnerAddress, amountOwner)
 
 		amountFee := total - amountOwner
 		log.Printf("Amount fee: %d\n", amountFee)
-		sendAnote(conf.OwnerAddress, amountFee)
+		sendAnote(NetworkNode, amountFee)
 	}
 }
 
