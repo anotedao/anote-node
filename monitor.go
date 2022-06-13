@@ -19,14 +19,14 @@ func (m *Monitor) getHeight() int {
 	return bhr.Height
 }
 
-func (m *Monitor) payToNetwork() {
+func (m *Monitor) sendRewards() {
 	amount := SatInBTC
 	amount = amount - (amount / 10)
 	sendAnote(NetworkNode, int(amount))
 }
 
 func (m *Monitor) isGeneratingNode() bool {
-	bar, err := gowaves.WNC.BlocksAt(uint(m.height))
+	bar, err := gowaves.WNC.BlocksAt(uint(m.height - 5))
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -39,7 +39,7 @@ func (m *Monitor) run() {
 		if m.getHeight() > m.height {
 			m.height = m.getHeight()
 			if m.isGeneratingNode() {
-				m.payToNetwork()
+				m.sendRewards()
 				log.Println("Mined.")
 			}
 		}
