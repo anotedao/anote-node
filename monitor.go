@@ -39,7 +39,7 @@ func (m *Monitor) sendRewards() {
 }
 
 func (m *Monitor) isGeneratingNode() bool {
-	bar, err := gowaves.WNC.BlocksAt(uint(m.height - 5))
+	bar, err := gowaves.WNC.BlocksAt(uint(m.height - 2))
 	if err != nil {
 		log.Println(err.Error())
 	}
