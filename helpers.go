@@ -184,7 +184,7 @@ func getIP() string {
 }
 
 func balance() int {
-	abr, err := gowaves.WNC.AddressesBalanceConfirmations(NodeAddress, 5)
+	abr, err := gowaves.WNC.AddressesBalanceConfirmations(NodeAddress, 3)
 	if err != nil {
 		log.Println(err.Error())
 		return 0
