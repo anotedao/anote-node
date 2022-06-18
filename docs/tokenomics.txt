@@ -1,5 +1,11 @@
-10000   - crowdfunding
+AINT (144,000)
+
+125.000 - mining value
+10.000   - crowdfunding
 5000    - early investors
+4000    - founder
+
+ANOTE
+
 5000    - Anote from WAVES network
 5000    - first 5 nodes
-3000    - founder

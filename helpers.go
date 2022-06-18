@@ -20,7 +20,7 @@ import (
 var (
 	lowerCharSet   = "abcdedfghijklmnopqrst"
 	upperCharSet   = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-	specialCharSet = "!@#$%&*"
+	specialCharSet = "!@#$%*"
 	numberSet      = "0123456789"
 	allCharSet     = lowerCharSet + upperCharSet + specialCharSet + numberSet
 )
