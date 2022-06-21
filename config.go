@@ -10,6 +10,8 @@ import (
 type Config struct {
 	ApiKey       string `json:"api_key"`
 	OwnerAddress string `json:"owner_address"`
+	PublicKey    string `json:"public_key"`
+	PrivateKey   string `json:"private_key"`
 }
 
 // Load method loads configuration file to Config struct

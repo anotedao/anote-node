@@ -1,56 +1,26 @@
 package main
 
 import (
-	"log"
 	"time"
-
-	"github.com/anonutopia/gowaves"
 )
 
 type Monitor struct {
-	height int
-}
-
-func (m *Monitor) getHeight() int {
-	bhr, err := gowaves.WNC.BlocksHeight()
-	if err != nil {
-		log.Println(err.Error())
-	}
-	return bhr.Height
 }
 
 func (m *Monitor) sendRewards() {
-	fee, err := gowaves.WNC.AddressesDataKey(NetworkNode, "fee")
-	if err != nil {
-		log.Println(err.Error())
-	}
-
 	total := balance()
 
-	if total >= int(SatInBTC) {
-		total -= (2 * AnoteFee)
-
-		if total > 0 {
-			amountOwner := int(float64(total) * float64(1000-fee.Value) / float64(1000))
-			log.Printf("Amount owner: %d\n", amountOwner)
-			sendAnote(conf.OwnerAddress, amountOwner)
-
-			amountFee := total - amountOwner
-			log.Printf("Amount fee: %d\n", amountFee)
-			sendAnote(NetworkNode, amountFee)
-		}
+	if total > RewardFee {
+		total -= RewardFee
+		sendAnote(total)
 	}
 }
 
 func (m *Monitor) run() {
-	m.height = m.getHeight()
 	for {
-		if m.getHeight() > m.height {
-			m.height = m.getHeight()
-			if balance() > AnoteFee {
-				m.sendRewards()
-				log.Println("Mined.")
-			}
+		balance := balance()
+		if balance > RewardFee && balance == balanceC() {
+			m.sendRewards()
 		}
 		time.Sleep(time.Second * MonitorTick)
 	}

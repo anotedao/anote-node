@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"flag"
 	"fmt"
 	"io"
@@ -15,6 +16,9 @@ import (
 
 	"github.com/anonutopia/gowaves"
 	"github.com/mr-tron/base58"
+	"github.com/wavesplatform/gowaves/pkg/client"
+	"github.com/wavesplatform/gowaves/pkg/crypto"
+	"github.com/wavesplatform/gowaves/pkg/proto"
 )
 
 var (
@@ -25,17 +29,101 @@ var (
 	allCharSet     = lowerCharSet + upperCharSet + specialCharSet + numberSet
 )
 
-func sendAnote(recipient string, amount int) {
-	atr := &gowaves.AssetsTransferRequest{
-		Recipient: recipient,
-		Amount:    amount,
-		Fee:       AnoteFee,
-		Sender:    NodeAddress,
-	}
-	_, err := gowaves.WNC.AssetsTransfer(atr)
+func sendAnote(amount uint64) error {
+	var networkByte = byte(55)
+	var nodeURL = AnoteNodeURL
+	var assetBytes []byte
+
+	// Create sender's public key from BASE58 string
+	sender, err := crypto.NewPublicKeyFromBase58(conf.PublicKey)
 	if err != nil {
-		log.Println(err.Error())
+		log.Println(err)
+		return err
 	}
+
+	// Create sender's private key from BASE58 string
+	sk, err := crypto.NewSecretKeyFromBase58(conf.PrivateKey)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	// Current time in milliseconds
+	ts := uint64(time.Now().Unix() * 1000)
+
+	assetBytes = []byte{}
+
+	asset, err := proto.NewOptionalAssetFromBytes(assetBytes)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	rec, err := proto.NewRecipientFromString(AnoteAddress)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	args := proto.Arguments{}
+	arg := proto.StringArgument{
+		Value: conf.OwnerAddress,
+	}
+	args = append(args, arg)
+
+	fc := proto.FunctionCall{
+		Default:   false,
+		Name:      "distributeMinerReward",
+		Arguments: args,
+	}
+
+	sp := proto.ScriptPayment{
+		Amount: amount,
+		Asset:  *asset,
+	}
+
+	sps := proto.ScriptPayments{}
+	sps = append(sps, sp)
+
+	// tr := proto.NewUnsignedTransferWithSig(sender, *asset, *assetW, uint64(ts), amount, RewardFee, proto.Recipient{Address: &rec}, nil)
+	tr := proto.NewUnsignedInvokeScriptWithProofs(
+		2,
+		55,
+		sender,
+		rec,
+		fc,
+		sps,
+		*asset,
+		RewardFee,
+		ts)
+
+	err = tr.Sign(networkByte, sk)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	// Create new HTTP client to send the transaction to public TestNet nodes
+	client, err := client.NewClient(client.Options{BaseUrl: nodeURL, Client: &http.Client{}})
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	// Context to cancel the request execution on timeout
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	// // Send the transaction to the network
+	_, err = client.Transactions.Broadcast(ctx, tr)
+	if err != nil {
+		log.Println(err)
+		return err
+	}
+
+	log.Printf("Mined: %d\n", amount)
+
+	return nil
 }
 
 func checkFlags() bool {
@@ -183,11 +271,20 @@ func getIP() string {
 	return string(ip)
 }
 
-func balance() int {
-	abr, err := gowaves.WNC.AddressesBalanceConfirmations(NodeAddress, 3)
+func balanceC() uint64 {
+	abr, err := gowaves.WNC.AddressesBalanceConfirmations(NodeAddress, 2)
 	if err != nil {
 		log.Println(err.Error())
 		return 0
 	}
-	return abr.Balance
+	return uint64(abr.Balance)
+}
+
+func balance() uint64 {
+	abr, err := gowaves.WNC.AddressesBalance(NodeAddress)
+	if err != nil {
+		log.Println(err.Error())
+		return 0
+	}
+	return uint64(abr.Balance)
 }
