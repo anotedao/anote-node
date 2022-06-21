@@ -32,6 +32,7 @@ service waves restart
 # Install Anote node
 chmod +x anote-node
 ./anote-node -init
+service waves stop &
 source ./seed
 sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KENCODED/g" waves.conf
@@ -48,7 +49,6 @@ sed -i "s/PRIVATEKEY/$PRIVATEKEY/g" config.json
 sed -i "s/KEY/$KEY/g" config.json
 
 # Remove extra files and folders
-service waves stop
 rm -rf /var/lib/waves
 rm -rf /var/lib/anote/wallet
 
