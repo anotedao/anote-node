@@ -43,9 +43,9 @@ mv anote.conf /etc/supervisor/conf.d/
 # Prepare node config file
 mv config.sample.json config.json
 sed -i "s/ADDRESS/$ADDRESS/g" config.json
-sed -i "s/KEY/$KEY/g" config.json
 sed -i "s/PUBLICKEY/$PUBLICKEY/g" config.json
 sed -i "s/PRIVATEKEY/$PRIVATEKEY/g" config.json
+sed -i "s/KEY/$KEY/g" config.json
 
 # Remove extra files and folders
 service waves stop
