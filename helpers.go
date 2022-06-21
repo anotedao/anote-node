@@ -3,6 +3,7 @@ package main
 import (
 	"bufio"
 	"context"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"io"
@@ -16,6 +17,7 @@ import (
 
 	"github.com/anonutopia/gowaves"
 	"github.com/mr-tron/base58"
+	wavesplatform "github.com/wavesplatform/go-lib-crypto"
 	"github.com/wavesplatform/gowaves/pkg/client"
 	"github.com/wavesplatform/gowaves/pkg/crypto"
 	"github.com/wavesplatform/gowaves/pkg/proto"
@@ -133,6 +135,7 @@ func checkFlags() bool {
 	if *init {
 		seedStr := ""
 		seed, encoded := generateSeed()
+		public, private := generateKeys(seed)
 		key, encKey := generateApiKey()
 		ip := getIP()
 
@@ -140,6 +143,8 @@ func checkFlags() bool {
 		seedStr += fmt.Sprintf("export ENCODED='%s'\n", encoded)
 		seedStr += fmt.Sprintf("export KEY='%s'\n", key)
 		seedStr += fmt.Sprintf("export KENCODED='%s'\n", encKey)
+		seedStr += fmt.Sprintf("export PUBLICKEY='%s'\n", public)
+		seedStr += fmt.Sprintf("export PRIVATEKEY='%s'\n", private)
 		seedStr += fmt.Sprintf("export PUBLICIP='%s'", ip)
 
 		f, _ := os.Create("seed")
@@ -201,12 +206,17 @@ func generateSeed() (seed string, encoded string) {
 	return seed, encoded
 }
 
+func generateKeys(seed string) (public string, private string) {
+	c := wavesplatform.NewWavesCrypto()
+	sd := wavesplatform.Seed(seed)
+	pair := c.KeyPair(sd)
+
+	return string(pair.PublicKey), string(pair.PrivateKey)
+}
+
 func generateApiKey() (key string, encodedKey string) {
 	key = generatePassword(15, 3, 2, 3)
 	uhsr, err := gowaves.WNC.UtilsHashSecure(key)
-	if err != nil {
-		log.Println(err.Error())
-	}
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -287,4 +297,9 @@ func balance() uint64 {
 		return 0
 	}
 	return uint64(abr.Balance)
+}
+
+func prettyPrint(i interface{}) string {
+	s, _ := json.MarshalIndent(i, "", "\t")
+	return string(s)
 }
