@@ -15,7 +15,7 @@ apt install -y supervisor ca-certificates-java fontconfig-config fonts-dejavu-co
   openjdk-17-jre-headless
 
 # Get all files
-wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.6/waves_1.4.6_all.deb
+wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.7/waves_1.4.7_all.deb
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.conf
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
 wget https://raw.githubusercontent.com/anonutopia/anote-node/main/config.sample.json
@@ -23,7 +23,7 @@ wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/anote.con
 wget https://github.com/anonutopia/anote-node/releases/download/v1.0.12/anote-node
 
 # Install Waves node
-dpkg -i waves_1.4.6_all.deb
+dpkg -i waves_1.4.7_all.deb
 mkdir /var/lib/anote
 chown -R waves:waves /var/lib/anote/
 cp waves.conf /etc/waves/waves.conf
