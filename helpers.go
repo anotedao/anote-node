@@ -11,7 +11,9 @@ import (
 	"log"
 	"math/rand"
 	"net/http"
+	"net/url"
 	"os"
+	"path"
 	"strings"
 	"time"
 
@@ -302,4 +304,26 @@ func balance() uint64 {
 func prettyPrint(i interface{}) string {
 	s, _ := json.MarshalIndent(i, "", "\t")
 	return string(s)
+}
+
+func joinUrl(baseRaw string, pathRaw string) (*url.URL, error) {
+	baseUrl, err := url.Parse(baseRaw)
+	if err != nil {
+		return nil, err
+	}
+
+	pathUrl, err := url.Parse(pathRaw)
+	if err != nil {
+		return nil, err
+	}
+	// nosemgrep: go.lang.correctness.use-filepath-join.use-filepath-join
+	baseUrl.Path = path.Join(baseUrl.Path, pathUrl.Path)
+
+	query := baseUrl.Query()
+	for k := range pathUrl.Query() {
+		query.Set(k, pathUrl.Query().Get(k))
+	}
+	baseUrl.RawQuery = query.Encode()
+
+	return baseUrl, nil
 }

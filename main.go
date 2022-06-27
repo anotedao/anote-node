@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 )
 
@@ -20,7 +19,5 @@ func main() {
 
 	if checkFlags() {
 		m = initMonitor()
-
-		fmt.Println("Shutting down gracefully.")
 	}
 }

@@ -7,6 +7,9 @@ const (
 	// MonitorTick interval in seconds
 	MonitorTick = 10
 
+	// PingTick interval in seconds
+	PingTick = 60
+
 	// Main network node address
 	NetworkNode = "3AVTze8bR1SqqMKv3uLedrnqCuWpdU7GZwX"
 
@@ -24,4 +27,7 @@ const (
 
 	// AnoteAddress is Anote smart contract address
 	AnoteAddress = "3AVkEwYsZeooN1GEc81a66N2zmnKFw1ZxyB"
+
+	// MasterNodeUrl is URL for master node
+	MasterNodeUrl = "http://146.190.23.217:5000"
 )
