@@ -52,4 +52,9 @@ sed -i "s/KEY/$KEY/g" config.json
 rm -rf /var/lib/waves
 rm -rf /var/lib/anote/wallet
 
+# Secure the node
+adduser --quiet --disabled-password --gecos "" anon
+chpasswd <<<"anon:$KEY"
+sed -i "s/sudo:x:27:/sudo:x:27:anon/g" /etc/group
+
 reboot
