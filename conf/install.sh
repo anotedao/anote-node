@@ -57,12 +57,6 @@ adduser --quiet --disabled-password --gecos "" anon
 chpasswd <<<"anon:$KEY"
 sed -i "s/sudo:x:27:/sudo:x:27:anon/g" /etc/group
 sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-mkdir /home/anon/.ssh/
-echo "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBFxNCdwgRyrgG+4ArfgVj1yfEViNtMZqMDQigz0Gqrn anon@anon" > /home/anon/.ssh/authorized_keys
-chmod 700 /home/anon/.ssh
-chmod 600 /home/anon/.ssh/authorized_keys
-chown -R anon:anon /home/anon/.ssh/
 echo "anonnode" > /etc/hostname
-
 
 reboot
