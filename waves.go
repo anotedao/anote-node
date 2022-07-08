@@ -9,7 +9,7 @@ import (
 )
 
 func initWaves() {
-	if conf.PrivateKey != "PUBLICKEY" {
+	if conf.PublicKey != "PUBLICKEY" {
 		pk := crypto.MustPublicKeyFromBase58(conf.PublicKey)
 		a, err := proto.NewAddressFromPublicKey(55, pk)
 		if err != nil {
