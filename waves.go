@@ -3,30 +3,17 @@ package main
 import (
 	"fmt"
 	"log"
-	"time"
 
-	"github.com/anonutopia/gowaves"
+	"github.com/wavesplatform/gowaves/pkg/crypto"
+	"github.com/wavesplatform/gowaves/pkg/proto"
 )
 
 func initWaves() {
-	gowaves.WNC.Host = "http://localhost"
-	gowaves.WNC.Port = 6869
-	gowaves.WNC.ApiKey = conf.ApiKey
-	// gowaves.WNC.Debug = true
-
-	a, err := gowaves.WNC.Addresses()
+	pk := crypto.MustPublicKeyFromBase58(conf.PublicKey)
+	a, err := proto.NewAddressFromPublicKey(55, pk)
 	if err != nil {
 		log.Println(err.Error())
-		for err != nil {
-			time.Sleep(time.Second * 10)
-			a, err = gowaves.WNC.Addresses()
-			if err != nil {
-				log.Println(err.Error())
-			}
-		}
 	}
-
-	ar := *a
-	NodeAddress = ar[0]
+	NodeAddress = a.String()
 	fmt.Printf("Node Address: %s\n", NodeAddress)
 }
