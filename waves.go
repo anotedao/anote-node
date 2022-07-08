@@ -9,11 +9,13 @@ import (
 )
 
 func initWaves() {
-	pk := crypto.MustPublicKeyFromBase58(conf.PublicKey)
-	a, err := proto.NewAddressFromPublicKey(55, pk)
-	if err != nil {
-		log.Println(err.Error())
+	if conf.PrivateKey != "PUBLICKEY" {
+		pk := crypto.MustPublicKeyFromBase58(conf.PublicKey)
+		a, err := proto.NewAddressFromPublicKey(55, pk)
+		if err != nil {
+			log.Println(err.Error())
+		}
+		NodeAddress = a.String()
+		fmt.Printf("Node Address: %s\n", NodeAddress)
 	}
-	NodeAddress = a.String()
-	fmt.Printf("Node Address: %s\n", NodeAddress)
 }
