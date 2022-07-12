@@ -42,10 +42,11 @@ func (m *Monitor) ping() {
 		log.Println(err.Error())
 	}
 
-	_, err = http.Get(url.String())
+	res, err := http.Get(url.String())
 	if err != nil {
 		log.Println(err.Error())
 	}
+	res.Body.Close()
 }
 
 func initMonitor() *Monitor {
