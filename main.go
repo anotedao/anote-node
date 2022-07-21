@@ -4,20 +4,14 @@ import (
 	"log"
 )
 
-var conf *Config
-
-var m *Monitor
-
 var NodeAddress string
+
+var OwnerAddress string
 
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	conf = initConfig()
+	checkFlags()
 
-	initWaves()
-
-	if checkFlags() {
-		m = initMonitor()
-	}
+	initAddresses()
 }
