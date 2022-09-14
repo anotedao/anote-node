@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/base64"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -15,23 +16,25 @@ import (
 )
 
 func initSeedFile() {
-	seedStr := ""
-	seed, encoded := generateSeed()
-	PublicKey, PrivateKey = generateKeys(seed)
-	key, encKey := generateApiKey()
-	ip := getIP()
+	if _, err := os.Stat("seed"); errors.Is(err, os.ErrNotExist) {
+		seedStr := ""
+		seed, encoded := generateSeed()
+		PublicKey, PrivateKey = generateKeys(seed)
+		key, encKey := generateApiKey()
+		ip := getIP()
 
-	seedStr += fmt.Sprintf("export SEED='%s'\n", seed)
-	seedStr += fmt.Sprintf("export ENCODED='%s'\n", encoded)
-	seedStr += fmt.Sprintf("export KEY='%s'\n", key)
-	seedStr += fmt.Sprintf("export KENCODED='%s'\n", encKey)
-	seedStr += fmt.Sprintf("export PUBLICKEY='%s'\n", PublicKey)
-	seedStr += fmt.Sprintf("export PRIVATEKEY='%s'\n", PrivateKey)
-	seedStr += fmt.Sprintf("export PUBLICIP='%s'", ip)
+		seedStr += fmt.Sprintf("export SEED='%s'\n", seed)
+		seedStr += fmt.Sprintf("export ENCODED='%s'\n", encoded)
+		seedStr += fmt.Sprintf("export KEY='%s'\n", key)
+		seedStr += fmt.Sprintf("export KENCODED='%s'\n", encKey)
+		seedStr += fmt.Sprintf("export PUBLICKEY='%s'\n", PublicKey)
+		seedStr += fmt.Sprintf("export PRIVATEKEY='%s'\n", PrivateKey)
+		seedStr += fmt.Sprintf("export PUBLICIP='%s'", ip)
 
-	f, _ := os.Create("seed")
-	defer f.Close()
-	f.Write([]byte(seedStr))
+		f, _ := os.Create("seed")
+		defer f.Close()
+		f.Write([]byte(seedStr))
+	}
 }
 
 func ping() {
