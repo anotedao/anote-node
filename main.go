@@ -15,7 +15,7 @@ var PrivateKey string
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	checkFlags()
+	initSeedFile()
 
 	initAddresses()
 }
