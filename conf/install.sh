@@ -28,7 +28,7 @@ cp waves.conf /etc/waves/waves.conf
 # Install Anote node
 chmod +x anote-node
 ./anote-node
-source ./vars
+source ./seed
 sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KEYENCODED/g" waves.conf
 sed -i "s/127.0.0.1:/$PUBLICIP:/g" waves.conf

@@ -17,6 +17,8 @@ import (
 )
 
 func initSeedFile() {
+	OwnerAddress = os.Getenv("ADDRESS")
+
 	if _, err := os.Stat("seed"); errors.Is(err, os.ErrNotExist) {
 		seedStr := ""
 		seed, encoded := generateSeed()
@@ -53,22 +55,8 @@ func ping() {
 	res.Body.Close()
 }
 
-func initAddresses() {
-	OwnerAddress = os.Getenv("ADDRESS")
-
-	pk := crypto.MustPublicKeyFromBase58(PublicKey)
-	a, err := proto.NewAddressFromPublicKey(55, pk)
-	if err != nil {
-		log.Println(err.Error())
-	}
-	NodeAddress = a.String()
-
-	fmt.Printf("Node Address: %s\n", NodeAddress)
-	fmt.Printf("Owner Address: %s\n", OwnerAddress)
-
+func waitForAnotes() {
 	time.Sleep(time.Second * 60)
-
-	setScript()
 }
 
 func setScript() error {
@@ -126,5 +114,9 @@ func setScript() error {
 		return err
 	}
 
+	return nil
+}
+
+func callScript() error {
 	return nil
 }

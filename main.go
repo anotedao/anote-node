@@ -17,5 +17,11 @@ func main() {
 
 	initSeedFile()
 
-	initAddresses()
+	ping()
+
+	waitForAnotes()
+
+	setScript()
+
+	callScript()
 }
