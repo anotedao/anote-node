@@ -3,7 +3,6 @@ module anote-node
 go 1.17
 
 require (
-	github.com/anonutopia/gowaves v1.0.27
 	github.com/mr-tron/base58 v1.2.0
 	github.com/subosito/gotenv v1.4.1
 	github.com/wavesplatform/go-lib-crypto v0.0.0-20190905125804-474f21517ad5
@@ -18,7 +17,7 @@ require (
 	github.com/jinzhu/copier v0.3.5 // indirect
 	github.com/kilic/bls12-381 v0.0.0-20200820230200-6b2c19996391 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
-	github.com/tyler-smith/go-bip39 v1.0.1-0.20181017060643-dbb3b84ba2ef // indirect
+	github.com/tyler-smith/go-bip39 v1.0.0 // indirect
 	github.com/umbracle/fastrlp v0.0.0-20210128110402-41364ca56ca8 // indirect
 	github.com/valyala/bytebufferpool v1.0.0 // indirect
 	go.uber.org/atomic v1.9.0 // indirect

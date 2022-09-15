@@ -27,5 +27,7 @@ func main() {
 
 	setScript()
 
+	waitForScript()
+
 	callScript()
 }

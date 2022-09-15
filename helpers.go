@@ -2,6 +2,7 @@ package main
 
 import (
 	"bufio"
+	"context"
 	"encoding/json"
 	"io"
 	"io/ioutil"
@@ -13,9 +14,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/anonutopia/gowaves"
 	"github.com/mr-tron/base58"
 	wavesplatform "github.com/wavesplatform/go-lib-crypto"
+	"github.com/wavesplatform/gowaves/pkg/client"
 	"github.com/wavesplatform/gowaves/pkg/crypto"
 	"github.com/wavesplatform/gowaves/pkg/proto"
 )
@@ -94,11 +95,23 @@ func generateKeys(seed string) (public string, private string) {
 
 func generateApiKey() (key string, encodedKey string) {
 	key = generatePassword(15, 3, 2, 3)
-	uhsr, err := gowaves.WNC.UtilsHashSecure(key)
+
+	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}})
 	if err != nil {
-		log.Println(err.Error())
+		log.Println(err)
+		return
 	}
-	return key, uhsr.Hash
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	uhs, _, err := cl.Utils.HashSecure(ctx, key)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	return key, uhs.Hash
 }
 
 func getRandNum() int {
