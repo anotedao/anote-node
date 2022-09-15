@@ -10,6 +10,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/subosito/gotenv"
 	"github.com/wavesplatform/gowaves/pkg/client"
 	"github.com/wavesplatform/gowaves/pkg/crypto"
 	"github.com/wavesplatform/gowaves/pkg/proto"
@@ -26,14 +27,16 @@ func initSeedFile() {
 		seedStr += fmt.Sprintf("export SEED='%s'\n", seed)
 		seedStr += fmt.Sprintf("export ENCODED='%s'\n", encoded)
 		seedStr += fmt.Sprintf("export KEY='%s'\n", key)
-		seedStr += fmt.Sprintf("export KENCODED='%s'\n", encKey)
-		seedStr += fmt.Sprintf("export PUBLICKEY='%s'\n", PublicKey)
-		seedStr += fmt.Sprintf("export PRIVATEKEY='%s'\n", PrivateKey)
+		seedStr += fmt.Sprintf("export KEYENCODED='%s'\n", encKey)
 		seedStr += fmt.Sprintf("export PUBLICIP='%s'", ip)
 
 		f, _ := os.Create("seed")
 		defer f.Close()
 		f.Write([]byte(seedStr))
+	} else {
+		gotenv.Load("seed")
+		seed := os.Getenv("SEED")
+		PublicKey, PrivateKey = generateKeys(seed)
 	}
 }
 
@@ -52,8 +55,6 @@ func ping() {
 
 func initAddresses() {
 	OwnerAddress = os.Getenv("ADDRESS")
-	PublicKey = os.Getenv("PUBLICKEY")
-	PrivateKey = os.Getenv("PRIVATEKEY")
 
 	pk := crypto.MustPublicKeyFromBase58(PublicKey)
 	a, err := proto.NewAddressFromPublicKey(55, pk)

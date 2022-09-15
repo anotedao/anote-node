@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/anonutopia/gowaves v1.0.27
 	github.com/mr-tron/base58 v1.2.0
+	github.com/subosito/gotenv v1.4.1
 	github.com/wavesplatform/go-lib-crypto v0.0.0-20190905125804-474f21517ad5
 	github.com/wavesplatform/gowaves v0.10.1
 )

@@ -1,0 +1,3 @@
+- update
+- install dependencies
+- get all files
