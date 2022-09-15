@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"log"
 )
 
@@ -16,6 +17,9 @@ func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
 	initSeedFile()
+
+	fmt.Printf("Node Address: %s\n", NodeAddress)
+	fmt.Printf("Owner Address: %s\n", OwnerAddress)
 
 	ping()
 

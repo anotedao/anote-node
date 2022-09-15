@@ -56,7 +56,32 @@ func ping() {
 }
 
 func waitForAnotes() {
-	time.Sleep(time.Second * 60)
+	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}})
+	if err != nil {
+		log.Println(err)
+		return
+	}
+
+	pk := crypto.MustPublicKeyFromBase58(string(PublicKey))
+	a, err := proto.NewAddressFromPublicKey(55, pk)
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	ab := &client.AddressesBalance{}
+
+	for ab.Balance == 0 {
+		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+		defer cancel()
+
+		ab, _, err = cl.Addresses.Balance(ctx, a)
+		if err != nil {
+			log.Println(err.Error())
+			return
+		}
+
+		time.Sleep(time.Second * 10)
+	}
 }
 
 func setScript() error {
