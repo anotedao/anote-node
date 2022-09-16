@@ -15,9 +15,9 @@ apt install -y ca-certificates-java fontconfig-config fonts-dejavu-core java-com
 
 # Get files
 wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.7/waves_1.4.7_all.deb
-wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/waves.conf
-wget https://raw.githubusercontent.com/anonutopia/anote-node/main/conf/application.ini
-wget https://github.com/anonutopia/anote-node/releases/download/v1.2.0/anote-node
+wget https://raw.githubusercontent.com/anotedigital/anote-node/main/conf/waves.conf
+wget https://raw.githubusercontent.com/anotedigital/anote-node/main/conf/application.ini
+wget https://github.com/anotedigital/anote-node/releases/download/v1.2.0/anote-node
 
 # Install Waves node
 dpkg -i waves_1.4.7_all.deb

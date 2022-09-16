@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 )
@@ -21,13 +22,18 @@ func main() {
 	fmt.Printf("Node Address: %s\n", NodeAddress)
 	fmt.Printf("Owner Address: %s\n", OwnerAddress)
 
-	ping()
+	setup := flag.Bool("setup", false, "Setup your Anote Node.")
+	flag.Parse()
 
-	waitForAnotes()
+	if *setup {
+		ping()
 
-	setScript()
+		waitForAnotes()
 
-	waitForScript()
+		setScript()
 
-	callScript()
+		waitForScript()
+
+		callScript()
+	}
 }
