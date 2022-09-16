@@ -55,7 +55,7 @@ func ping() {
 	if err != nil {
 		log.Println(err.Error())
 	}
-	res.Body.Close()
+	defer res.Body.Close()
 
 	pr := &PingResponse{}
 	decoder := json.NewDecoder(res.Body)
