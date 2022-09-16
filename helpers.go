@@ -198,3 +198,7 @@ func joinUrl(baseRaw string, pathRaw string) (*url.URL, error) {
 
 	return baseUrl, nil
 }
+
+type PingResponse struct {
+	Success bool `json:"success"`
+}

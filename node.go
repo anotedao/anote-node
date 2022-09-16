@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"encoding/base64"
+	"encoding/json"
 	"errors"
 	"fmt"
 	"log"
@@ -43,7 +44,9 @@ func initSeedFile() {
 }
 
 func ping() {
-	url, err := joinUrl(MasterNodeUrl, fmt.Sprintf("/ping/%s/%s", OwnerAddress, NodeAddress))
+	ip := getIP()
+
+	url, err := joinUrl(MasterNodeUrl, fmt.Sprintf("/ping/%s/%s/%s", OwnerAddress, NodeAddress, ip))
 	if err != nil {
 		log.Println(err.Error())
 	}
@@ -53,6 +56,18 @@ func ping() {
 		log.Println(err.Error())
 	}
 	res.Body.Close()
+
+	pr := &PingResponse{}
+	decoder := json.NewDecoder(res.Body)
+	err = decoder.Decode(pr)
+	if err != nil {
+		log.Println(err)
+	}
+
+	if !pr.Success {
+		time.Sleep(time.Second * 10)
+		ping()
+	}
 }
 
 func waitForAnotes() {
