@@ -7,6 +7,9 @@ echo "Waiting for other apt-get instances to exit"
 sleep 10
 done
 
+# Wait for initial droplet setup to finish
+sleep 20
+
 # Update, upgrade and install dependencies
 export DEBIAN_FRONTEND=noninteractive
 apt update
