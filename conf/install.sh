@@ -19,6 +19,13 @@ wget https://raw.githubusercontent.com/anotedigital/anote-node/main/conf/waves.c
 wget https://raw.githubusercontent.com/anotedigital/anote-node/main/conf/application.ini
 wget https://github.com/anotedigital/anote-node/releases/download/v1.2.0/anote-node
 
+# Wait for apt to finish
+while fuser /var/lib/apt/lists/lock >/dev/null 2>&1 ; do
+echo "Waiting for other apt-get instances to exit"
+# Sleep to avoid pegging a CPU core while polling this lock
+sleep 10
+done
+
 # Install Waves node
 dpkg -i waves_1.4.8_all.deb
 mkdir /var/lib/anote
