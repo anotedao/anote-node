@@ -96,7 +96,7 @@ func generateKeys(seed string) (public string, private string) {
 func generateApiKey() (key string, encodedKey string) {
 	key = generatePassword(15, 3, 2, 3)
 
-	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}})
+	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}, ApiKey: "test"})
 	if err != nil {
 		log.Println(err)
 		return
