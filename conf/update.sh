@@ -9,5 +9,3 @@ wget https://github.com/anotedigital/anote-node/releases/download/v1.2.3/anote-n
 
 dpkg -i waves_1.4.8_all.deb
 chmod +x anote-node
-
-./anote-node -update
