@@ -18,8 +18,6 @@ import (
 )
 
 func initSeedFile() {
-	OwnerAddress = os.Getenv("ADDRESS")
-
 	if _, err := os.Stat("seed"); errors.Is(err, os.ErrNotExist) {
 		seedStr := ""
 		seed, encoded := generateSeed()

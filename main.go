@@ -1,9 +1,9 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"log"
+	"os"
 )
 
 var NodeAddress string
@@ -20,12 +20,15 @@ func main() {
 	initSeedFile()
 
 	fmt.Printf("Node Address: %s\n", NodeAddress)
-	fmt.Printf("Owner Address: %s\n", OwnerAddress)
 
-	setup := flag.Bool("setup", false, "Setup your Anote Node.")
-	flag.Parse()
+	// setup := flag.Bool("setup", false, "Setup your Anote Node.")
+	// update := flag.Bool("update", false, "Update your Anote Node.")
+	// flag.Parse()
 
-	if *setup {
+	if len(os.Args) == 2 {
+		OwnerAddress = os.Args[1]
+		fmt.Printf("Owner Address: %s\n", OwnerAddress)
+
 		ping()
 
 		waitForAnotes()
