@@ -14,7 +14,7 @@ const (
 	SeedWordsURL = "https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt"
 
 	// AnoteNodeURL is an URL for Anote Node
-	AnoteNodeURL = "https://nodes.aint.digital"
+	AnoteNodeURL = "https://nodes.anote.digital"
 
 	// AnoteAddress is Anote smart contract address
 	AnoteAddress = "3AVkEwYsZeooN1GEc81a66N2zmnKFw1ZxyB"
