@@ -27,7 +27,9 @@ func main() {
 
 	if len(os.Args) == 2 {
 		OwnerAddress = os.Args[1]
+
 		fmt.Printf("Owner Address: %s\n", OwnerAddress)
+		fmt.Println("Installing Anote Node... Please wait!")
 
 		ping()
 
@@ -38,5 +40,7 @@ func main() {
 		waitForScript()
 
 		callScript()
+
+		fmt.Println("Anote Node installation is now done.")
 	}
 }
