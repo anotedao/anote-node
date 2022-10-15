@@ -161,6 +161,8 @@ func getIP() string {
 	resp, err := http.Get(url)
 	if err != nil {
 		log.Println(err.Error())
+		time.Sleep(time.Second * 10)
+		return getIP()
 	}
 	defer resp.Body.Close()
 
