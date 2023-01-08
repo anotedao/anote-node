@@ -1,9 +1,9 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
-	"os"
 )
 
 var NodeAddress string
@@ -21,16 +21,32 @@ func main() {
 
 	fmt.Printf("Node Address: %s\n", NodeAddress)
 
-	if len(os.Args) == 2 {
-		OwnerAddress = os.Args[1]
+	init := flag.Bool("init", false, "Initialize your Anote Node with secret file.")
+	install := flag.String("install", "", "Install your Anote Node.")
+	flag.Parse()
+
+	if *init {
+		initSecretsFile()
+	} else if len(*install) > 0 {
+		initSecretsFile()
+
+		OwnerAddress = *install
 
 		fmt.Printf("Owner Address: %s\n", OwnerAddress)
 		fmt.Println("Installing Anote Node... Please wait!")
 
-		setScript()
+		err := setScript()
 
-		callScript()
+		waitForScript()
 
-		fmt.Println("Anote Node installation is now done.")
+		err1 := callScript()
+
+		if err == nil && err1 == nil {
+			fmt.Println("Anote Node installation is now done.")
+		} else {
+			fmt.Println("Errror occured.")
+		}
+	} else {
+		flag.Usage()
 	}
 }
