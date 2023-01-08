@@ -201,6 +201,25 @@ func joinUrl(baseRaw string, pathRaw string) (*url.URL, error) {
 	return baseUrl, nil
 }
 
-type PingResponse struct {
-	Success bool `json:"success"`
+func getAddress() string {
+	a := ""
+
+	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}, ApiKey: "test"})
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	ar, _, err := cl.Addresses.Addresses(ctx)
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+
+	a = ar[0].String()
+
+	return a
 }
