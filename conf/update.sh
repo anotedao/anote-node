@@ -16,7 +16,8 @@ sudo dpkg -i waves_1.4.11_all.deb
 
 # Configure new blockchain
 chmod +x anote-node
-source ./seed
+mv seed secrets
+source ./secrets
 sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KEYENCODED/g" waves.conf
 sed -i "s/127.0.0.1:/$PUBLICIP:/g" waves.conf
