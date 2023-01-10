@@ -201,60 +201,37 @@ func joinUrl(baseRaw string, pathRaw string) (*url.URL, error) {
 	return baseUrl, nil
 }
 
-func getAddress() string {
-	a := ""
+// func getHeight() uint64 {
+// 	height := uint64(0)
 
-	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}, ApiKey: "test"})
-	if err != nil {
-		log.Println(err)
-		return ""
-	}
+// 	cl, err := client.NewClient(client.Options{BaseUrl: "http://localhost:6869", Client: &http.Client{}})
+// 	if err != nil {
+// 		log.Println(err)
+// 		// logTelegram(err.Error())
+// 	}
 
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
+// 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+// 	defer cancel()
 
-	ar, _, err := cl.Addresses.Addresses(ctx)
-	if err != nil {
-		log.Println(err)
-		return ""
-	}
+// 	bh, _, err := cl.Blocks.Height(ctx)
 
-	a = ar[0].String()
+// 	if err == nil {
+// 		height = bh.Height
+// 	} else {
+// 		log.Println(err)
+// 	}
 
-	return a
-}
+// 	return height
+// }
 
-func getHeight() uint64 {
-	height := uint64(0)
+// func waitHeight() {
+// 	wait := true
 
-	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}})
-	if err != nil {
-		log.Println(err)
-		// logTelegram(err.Error())
-	}
-
-	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-	defer cancel()
-
-	bh, _, err := cl.Blocks.Height(ctx)
-
-	if err == nil {
-		height = bh.Height
-	} else {
-		log.Println(err)
-	}
-
-	return height
-}
-
-func waitHeight() {
-	wait := true
-
-	for wait {
-		h := getHeight()
-		if h > 21000 {
-			wait = false
-		}
-		time.Sleep(time.Second)
-	}
-}
+// 	for wait {
+// 		h := getHeight()
+// 		if h > 21000 {
+// 			wait = false
+// 		}
+// 		time.Sleep(time.Second)
+// 	}
+// }
