@@ -17,21 +17,21 @@ apt upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-
 apt install -y ca-certificates-java fontconfig-config fonts-dejavu-core java-common libavahi-client3 libavahi-common-data libavahi-common3 libcups2 libfontconfig1 libgraphite2-3 libharfbuzz0b libjpeg-turbo8 libjpeg8 liblcms2-2 libpcsclite1 openjdk-17-jre-headless
 
 # Get files
-wget -c https://github.com/wavesplatform/Waves/releases/download/v1.4.10/waves_1.4.10_all.deb
-wget https://raw.githubusercontent.com/anotedigital/anote-node/main/conf/waves.conf
+wget https://github.com/anotedigital/anote-node/releases/download/v2.0-beta0/anote-node
+wget https://github.com/anotedigital/anote-node/raw/main/conf/waves.conf
+wget https://github.com/wavesplatform/Waves/releases/download/v1.4.11/waves_1.4.11_all.deb
 wget https://raw.githubusercontent.com/anotedigital/anote-node/main/conf/application.ini
-wget https://github.com/anotedigital/anote-node/releases/download/v1.2.6/anote-node
 
 # Install Waves node
-dpkg -i waves_1.4.10_all.deb
+dpkg -i waves_1.4.11_all.deb
 mkdir /var/lib/anote
 chown -R waves:waves /var/lib/anote/
 cp waves.conf /etc/waves/waves.conf
 
 # Install Anote node
 chmod +x anote-node
-./anote-node
-source ./seed
+./anote-node -init
+source ./secrets
 sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KEYENCODED/g" waves.conf
 sed -i "s/127.0.0.1:/$PUBLICIP:/g" waves.conf
