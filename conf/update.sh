@@ -3,7 +3,6 @@
 # Get the files
 wget https://github.com/anotedigital/anote-node/releases/download/v2.0-beta0/anote-node
 wget https://github.com/anotedigital/anote-node/raw/v2.0-beta0/conf/waves.conf
-wget https://github.com/anotedigital/anote-node/raw/v2.0-beta0/conf/update.sh
 wget https://github.com/wavesplatform/Waves/releases/download/v1.4.11/waves_1.4.11_all.deb
 
 # Stop waves
