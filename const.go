@@ -11,5 +11,5 @@ const (
 	SeedWordsURL = "https://raw.githubusercontent.com/bitcoin/bips/master/bip-0039/english.txt"
 
 	// AnoteNodeURL is an URL for Anote Node
-	AnoteNodeURL = "https://node.anote.digital"
+	AnoteNodeURL = "https://localhost:6869"
 )

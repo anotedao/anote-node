@@ -2,4 +2,4 @@ rm *.json *.sh waves* anote-node
 
 wget https://github.com/anotedigital/anote-node/raw/main/conf/update.sh && chmod +x update.sh && ./update.sh
 
-anote-node -install=OWNER_ADDRESS
+./anote-node -install=OWNER_ADDRESS
