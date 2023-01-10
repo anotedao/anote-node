@@ -17,21 +17,20 @@ var PrivateKey string
 func main() {
 	log.SetFlags(log.LstdFlags | log.Lshortfile)
 
-	NodeAddress = getAddress()
-
-	fmt.Printf("Node Address: %s\n", NodeAddress)
-
 	init := flag.Bool("init", false, "Initialize your Anote Node with secret file.")
 	install := flag.String("install", "", "Install your Anote Node.")
 	flag.Parse()
 
 	if *init {
 		initSecretsFile()
+
+		fmt.Printf("Node Address: %s\n", NodeAddress)
 	} else if len(*install) > 0 {
 		initSecretsFile()
 
 		OwnerAddress = *install
 
+		fmt.Printf("Node Address: %s\n", NodeAddress)
 		fmt.Printf("Owner Address: %s\n", OwnerAddress)
 		fmt.Println("Installing Anote Node... Please wait!")
 
