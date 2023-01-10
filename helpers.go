@@ -223,3 +223,34 @@ func getAddress() string {
 
 	return a
 }
+
+func getHeight() uint64 {
+	height := uint64(0)
+
+	cl, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}})
+	if err != nil {
+		log.Println(err)
+		// logTelegram(err.Error())
+	}
+
+	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
+	defer cancel()
+
+	bh, _, err := cl.Blocks.Height(ctx)
+
+	height = bh.Height
+
+	return height
+}
+
+func waitHeight() {
+	wait := true
+
+	for wait {
+		h := getHeight()
+		if h > 21000 {
+			wait = false
+		}
+		time.Sleep(time.Second)
+	}
+}

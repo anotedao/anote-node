@@ -35,6 +35,8 @@ func main() {
 		fmt.Printf("Owner Address: %s\n", OwnerAddress)
 		fmt.Println("Installing Anote Node... Please wait!")
 
+		waitHeight()
+
 		err := setScript()
 
 		waitForScript()
