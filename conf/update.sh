@@ -23,6 +23,7 @@ sudo dpkg -i waves_1.4.20_all.deb
 # mv waves.conf /etc/waves/waves.conf
 sed -i "s/17]/17, 18, 19, 20]/g" /etc/waves/waves.conf
 sed -i "s/min-block-time = 5s/min-block-time = 5s\r\n        dao-address = \"3AVTze8bR1SqqMKv3uLedrnqCuWpdU7GZwX\"\r\n        xtn-buyback-address = \"3AVTze8bR1SqqMKv3uLedrnqCuWpdU7GZwX\"/g" /etc/waves/waves.conf
+sed -i "s/desired = 100000000/desired = 100000000\r\n        term-after-capped-reward-feature = 100000/g" /etc/waves/waves.conf
 
 # Stop waves
 sudo service waves start
