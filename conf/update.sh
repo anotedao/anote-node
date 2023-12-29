@@ -8,7 +8,7 @@ wget https://github.com/wavesplatform/Waves/releases/download/v1.4.20/waves_1.4.
 sudo service waves stop
 
 # Remove old blockchain
-# sudo rm -rf /var/lib/anote/*
+sudo rm -rf /var/lib/anote/*
 
 # Install new waves node
 sudo dpkg -i waves_1.4.20_all.deb
