@@ -43,10 +43,10 @@ rm -rf /var/lib/waves
 rm -rf /var/lib/anote/wallet
 
 # Secure the node
-adduser --quiet --disabled-password --gecos "" anon
-chpasswd <<<"anon:$KEY"
-sed -i "s/sudo:x:27:/sudo:x:27:anon/g" /etc/group
-sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
-echo "anonnode" > /etc/hostname
+# adduser --quiet --disabled-password --gecos "" anon
+# chpasswd <<<"anon:$KEY"
+# sed -i "s/sudo:x:27:/sudo:x:27:anon/g" /etc/group
+# sed -i "s/PasswordAuthentication no/PasswordAuthentication yes/g" /etc/ssh/sshd_config
+# echo "anonnode" > /etc/hostname
 
 reboot
