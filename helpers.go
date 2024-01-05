@@ -201,6 +201,27 @@ func joinUrl(baseRaw string, pathRaw string) (*url.URL, error) {
 	return baseUrl, nil
 }
 
+func getOwnerAddress(alias string) string {
+	owner := ""
+
+	// Create new HTTP client to send the transaction to public TestNet nodes
+	client, err := client.NewClient(client.Options{BaseUrl: AnoteNodeURL, Client: &http.Client{}})
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+
+	wa, _, err := client.Alias.Get(context.Background(), alias)
+	if err != nil {
+		log.Println(err)
+		return ""
+	}
+
+	owner = wa.String()
+
+	return owner
+}
+
 // func getHeight() uint64 {
 // 	height := uint64(0)
 

@@ -28,7 +28,7 @@ func main() {
 	} else if len(*install) > 0 {
 		initSecretsFile()
 
-		OwnerAddress = *install
+		OwnerAddress = getOwnerAddress(*install)
 
 		fmt.Printf("Node Address: %s\n", NodeAddress)
 		fmt.Printf("Owner Address: %s\n", OwnerAddress)

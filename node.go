@@ -25,6 +25,7 @@ func initSecretsFile() {
 		ip := getIP()
 
 		seedStr += fmt.Sprintf("export SEED='%s'\n", seed)
+		seedStr += fmt.Sprintf("export ADDRESS='%s'\n", NodeAddress)
 		seedStr += fmt.Sprintf("export ENCODED='%s'\n", encoded)
 		seedStr += fmt.Sprintf("export KEY='%s'\n", key)
 		seedStr += fmt.Sprintf("export KEYENCODED='%s'\n", encKey)
