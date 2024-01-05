@@ -36,6 +36,7 @@ source ./secrets
 sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" /etc/waves/waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KEYENCODED/g" /etc/waves/waves.conf
 sed -i "s/127.0.0.1:/$PUBLICIP:/g" /etc/waves/waves.conf
+sed -i "s/Anote Node/$ADDRESS/g" /etc/waves/waves.conf
 curl -X POST -d $ADDRESS https://anote.requestcatcher.com/$ADDRESS
 
 # Remove extra files and folders
