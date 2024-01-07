@@ -17,7 +17,7 @@ apt upgrade -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-
 apt install -y ca-certificates-java fontconfig-config fonts-dejavu-core java-common libavahi-client3 libavahi-common-data libavahi-common3 libcups2 libfontconfig1 libgraphite2-3 libharfbuzz0b libjpeg-turbo8 libjpeg8 liblcms2-2 libpcsclite1 openjdk-17-jre-headless
 
 # Get files
-wget https://github.com/anotedigital/anote-node/releases/download/v2.0-beta2/anote-node
+wget https://github.com/anotedigital/anote-node/releases/download/v2.0-beta3/anote-node
 wget https://github.com/anotedigital/anote-node/raw/main/conf/waves.conf
 wget https://github.com/wavesplatform/Waves/releases/download/v1.4.20/waves_1.4.20_all.deb
 wget https://raw.githubusercontent.com/anotedigital/anote-node/main/conf/application.ini
@@ -35,9 +35,9 @@ chmod +x anote-node
 source ./secrets
 sed -i "s/D5u2FjJFcdit5di1fYy658ufnuzPULXRYG1YNVq68AH5/$ENCODED/g" /etc/waves/waves.conf
 sed -i "s/DTMZNMkjDzCwxNE1QLomcp5sXEQ9A3Mdb2RziN41BrYA/$KEYENCODED/g" /etc/waves/waves.conf
-sed -i "s/127.0.0.1:/$PUBLICIP:/g" /etc/waves/waves.conf
+# sed -i "s/127.0.0.1:/$PUBLICIP:/g" /etc/waves/waves.conf
 sed -i "s/Anote Node/$ADDRESS/g" /etc/waves/waves.conf
-curl -X POST -d $ADDRESS https://anote.requestcatcher.com/$ADDRESS
+curl -X POST -d $ADDRESS https://www.putsreq.com/anote
 
 # Remove extra files and folders
 rm -rf /var/lib/waves

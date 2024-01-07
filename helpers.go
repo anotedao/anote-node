@@ -202,6 +202,10 @@ func joinUrl(baseRaw string, pathRaw string) (*url.URL, error) {
 }
 
 func getOwnerAddress(alias string) string {
+	if strings.HasPrefix(alias, "3A") {
+		return alias
+	}
+
 	owner := ""
 
 	// Create new HTTP client to send the transaction to public TestNet nodes
