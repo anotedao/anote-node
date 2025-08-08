@@ -202,9 +202,9 @@ func joinUrl(baseRaw string, pathRaw string) (*url.URL, error) {
 }
 
 func getOwnerAddress(alias string) string {
-	if strings.HasPrefix(alias, "3A") {
-		return alias
-	}
+	// if strings.HasPrefix(alias, "3A") {
+	// 	return alias
+	// }
 
 	owner := ""
 
