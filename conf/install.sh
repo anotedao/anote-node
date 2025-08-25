@@ -18,7 +18,7 @@ apt-get install -y ca-certificates-java fontconfig-config fonts-dejavu-core java
 
 # Get files
 wget https://github.com/anotedao/anote-node/releases/download/v2.0-beta6/anote-node
-wget https://github.com/anotedao/anote-node/raw/main/conf/waves.conf
+wget https://raw.githubusercontent.com/anotedao/anote-node/refs/heads/main/conf/waves.conf
 wget https://github.com/wavesplatform/Waves/releases/download/v1.4.20/waves_1.4.20_all.deb
 wget https://raw.githubusercontent.com/anotedao/anote-node/main/conf/application.ini
 
