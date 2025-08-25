@@ -25,6 +25,8 @@ wget https://raw.githubusercontent.com/anotedao/anote-node/main/conf/application
 # Install Waves node
 dpkg -i waves_1.4.20_all.deb
 mkdir /var/lib/anote
+tar -xzf data.tar.gz
+mv data /var/lib/anote/
 chown -R waves:waves /var/lib/anote/
 cp waves.conf /etc/waves/waves.conf
 mv application.ini /etc/waves/application.ini
