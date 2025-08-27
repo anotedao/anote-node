@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+
+  node1:
+    image: aintchain/node
+    container_name: node1
+    volumes:
+      - ./persistent/node1:/var/lib/anote
+    restart: always
+  
+  node2:
+    image: aintchain/node
+    container_name: node2
+    volumes:
+      - ./persistent/node2:/var/lib/anote
+    restart: always
+
+  node3:
+    image: aintchain/node
+    container_name: node3
+    volumes:
+      - ./persistent/node3:/var/lib/anote
+    restart: always

@@ -12,7 +12,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 RUN mkdir /var/lib/anote
 
-COPY data /var/lib/anote/data/
+COPY data data
 
 COPY conf/waves.conf waves.conf
 
