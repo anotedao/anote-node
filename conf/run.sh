@@ -1,10 +1,11 @@
 #!/bin/bash
 
-if [ -f secrets ]; then
+if [ -f /var/lib/anote/secrets ]; then
     java -jar waves-all-1.4.20.jar /var/lib/anote/waves.conf
 else 
     ./anote-node -init
-    source ./secrets
+    mv secrets /var/lib/anote/
+    source /var/lib/anote/secrets
 
     mv data /var/lib/anote/
     mv waves.conf /var/lib/anote/waves.conf
